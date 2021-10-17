@@ -1,0 +1,80 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/*preloader css*/
+.spinner-warp{
+  position: absolute;
+  width: 100%;
+  height: 100vh;
+  background: rgb(255 255 255 / 58%);
+  z-index: 10;}
+#spinner.active {
+  display: block;
+}
+#spinner {
+  display: none;
+  position: absolute;
+  height: 60px;
+  width: 60px;
+  top: 40%;
+  left: 48%;
+  z-index: 1;
+}
+.spinner_ball {
+  position: absolute;
+  display: block;
+  background-color: #3f51b5;
+  left: 24px;
+  width: 12px;
+  height: 12px;
+  border-radius: 6px;
+}
+#ball_1 {
+  animation-timing-function: cubic-bezier(0.5, 0.3, 0.9, 0.9);
+  animation-name: rotate; 
+  animation-duration: 2s; 
+  animation-iteration-count: infinite;
+  transform-origin: 6px 30px;
+}
+#ball_2 {
+  animation-timing-function: cubic-bezier(0.5, 0.5, 0.9, 0.9);
+  animation-name: rotate; 
+  animation-duration: 2s; 
+  animation-iteration-count: infinite;
+  transform-origin: 6px 30px;
+}
+#ball_3 {
+  animation-timing-function: cubic-bezier(0.5, 0.7, 0.9, 0.9);
+  animation-name: rotate; 
+  animation-duration: 2s; 
+  animation-iteration-count: infinite;
+  transform-origin: 6px 30px;
+}
+@keyframes rotate {
+0% {
+  transform: rotate(0deg) scale(1);
+}
+100% { 
+  transform: rotate(1440deg) scale(1); 
+}
+}
+.poster-img{
+  height: 300px;
+}
+.poster-svg{
+  height: 300px;
+}
+.movie-col .card-text{
+  min-height: 72px;
+}
