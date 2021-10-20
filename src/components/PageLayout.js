@@ -1,4 +1,4 @@
-import {Switch,Route} from "react-router-dom"
+import {Switch,Route,Redirect} from "react-router-dom"
 import Preloader from "./Preloader"
 import Home from "./Home"
 import About from "./About"
@@ -21,8 +21,8 @@ return (
             <Route path="/movie-details/:id">
                 <MovieDetails />
             </Route>
-            <Route path="/">
-                <Home />
+            <Route path="/movie">
+                <Home/>
             </Route>
         </Switch> 
         {props.childern}

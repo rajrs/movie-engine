@@ -36,7 +36,7 @@ return queryString
     const response = await axios.get(`${baseUrl}${query}`
     );
     dispatch(setLoader(false))
-    return response.data.results;
+    return response.data;
   }
   export const getSimilarMovies= async(searchParam,{dispatch}) => {
     dispatch(setLoader(true))

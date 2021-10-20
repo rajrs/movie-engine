@@ -1,5 +1,6 @@
 import React , { useState }from 'react';
 import {Link} from "react-router-dom"
+import { withRouter } from 'react-router';
 
 const NavBar= (props)=>{
 const [menuToggle,setMenuToggle ]= useState(false)
@@ -8,7 +9,7 @@ const [menuToggle,setMenuToggle ]= useState(false)
     }
 return (
 
-<nav className="navbar navbar-dark bg-dark shadow-sm navbar-expand-lg">
+<nav className="navbar navbar-dark bg-dark shadow-sm navbar-expand-lg mb-3">
   <div className="container">
   <Link className="navbar-brand" to="#">MovieFlex</Link>
   <button className="navbar-toggler" type="button" data-toggle="collapse" onClick={mobileMenuToggle} data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -17,7 +18,7 @@ return (
 <div className={"collapse navbar-collapse "+(menuToggle? 'show':'' )} id="navbarNavDropdown">
   <ul className="navbar-nav">
     <li className="nav-item">
-      <Link to="/" className="nav-link">Home </Link>
+      <Link to="/movie" className="nav-link">Home </Link>
     </li>
     <li className="nav-item">
         <Link to="/about"  className="nav-link">About</Link>
@@ -41,4 +42,4 @@ return (
 </nav>)
 }
 
-export default NavBar;
+export default withRouter(NavBar);
