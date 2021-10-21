@@ -1,57 +1,54 @@
 import {setLoader} from "../slice/loaderSlice";
 import axios from 'axios';
-const  baseUrl= 'https://api.themoviedb.org/3/search/movie?';
-const ApiKey = 'api_key=7b642aed2489a8f6bfc80d04a2421e1c&language=en-US'
-let defaultParams = {
-  api_key:'7b642aed2489a8f6bfc80d04a2421e1c',
-  language:'en-US',
-  query: 'value_ 1',
-  page: 1,
-  include_adult: false 
-};
+const  baseUrl= 'https://api.themoviedb.org/3/';
+
 function constructQuery(params){
   let defaultParams = {
     api_key:'7b642aed2489a8f6bfc80d04a2421e1c',
     language:'en-US',
+    page: 1,
+    include_adult: false
   };
   params = Object.assign(defaultParams, params);
-let esc = encodeURIComponent;
-var queryString = Object.keys(params)
-  .map(k => `${esc(k)}=${esc(params[k])}`)
-  .join('&');
-return queryString
+  console.log(params)
+  let esc = encodeURIComponent;
+  var queryString = Object.keys(params)
+    .map(k => `${esc(k)}=${esc(params[k])}`)
+    .join('&');
+  return queryString
 }
-//&query=The%20summer&page=1&include_adult=false'
 
-// export const fetchTodos = createAsyncThunk('todos/fetchTodos', async () => {
-//     const response = await axios.get(
-//       'https://eager-supreme-appalachiosaurus.glitch.me/todos'
-//     );
-//     return response.data.todoList;
-//   });
-
+let controlFlick= (flag)=>{
+  if(flag){
+    document.body.classList.add('flow-block')
+  }else {
+    document.body.classList.remove('flow-block')
+  }
+}
   export const fetchMoviesList =  async (Params,{dispatch}) => {
+    controlFlick(true)
     dispatch(setLoader(true))
-    let query = constructQuery(Params)
-    const response = await axios.get(`${baseUrl}${query}`
-    );
+    let queryString = `${baseUrl}search/movie?${constructQuery(Params)}`
+    console.log(queryString)
+    try{
+      const response = await axios.get(queryString);
+      controlFlick(false)
+      dispatch(setLoader(false))
+      return response.data;
+    }catch(err){
+      controlFlick(false)
+      dispatch(setLoader(false))
+      return err.response.data
+    }
+
+  }
+  export const getSimilarMovies= async(movieId,{dispatch}) => {
+    controlFlick(true)
+    dispatch(setLoader(true))
+    let queryString = `${baseUrl}movie/${movieId}/similar?${constructQuery()}`
+    console.log(queryString)
+    const response = await axios.get(queryString);
+    controlFlick(false)
     dispatch(setLoader(false))
     return response.data;
-  }
-  export const getSimilarMovies= async(searchParam,{dispatch}) => {
-    dispatch(setLoader(true))
-    const response = await axios.get(
-     baseUrl+'&query='+searchParam+'&page=1&include_adult=false'
-    );
-    dispatch(setLoader(false))
-    return response.data.results;
-  }
-
-  export const getMovieDetails= async(movieId,{dispatch}) => {
-    dispatch(setLoader(true))
-    const response = await axios.get(
-     `${baseUrl}${movieId}${ApiKey}`
-    );
-    dispatch(setLoader(false))
-    return response.data.results;
   }

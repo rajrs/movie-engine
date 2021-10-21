@@ -1,7 +1,8 @@
-import { useLocation } from "react-router"
-
+import { useLocation,useHistory  } from "react-router"
+import { ArrowBackOutline } from 'react-ionicons'
 const MovieDetails=(props)=>{
-    const location = useLocation()
+    let location = useLocation()
+    let history = useHistory();
     console.log(location)
     const{original_title,title,overview,poster_path,vote_average,vote_count}=location.state;
     let img
@@ -13,6 +14,14 @@ const MovieDetails=(props)=>{
     return (<>
     <div className="row  justify-content-center mt-4">
         <div className="col-4 movie-col" >
+            <div className="pb-2 pointer">
+            <ArrowBackOutline onClick={history.goBack}
+            color={'#00000'}
+            height="30px"
+            width="30px"
+            />
+            </div>
+       
             <div className="card shadow-sm">
             {img}
             <div className="card-body">

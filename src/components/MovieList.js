@@ -1,41 +1,42 @@
-import { useRouteMatch,Link } from 'react-router-dom';
+import {Link } from 'react-router-dom';
+import { slug } from '../utilities/common';
+import { SadOutline } from 'react-ionicons'
+const NoResult =(props)=>{
+  return (
+  <div className="col text-center pt-4">
+    <div className="mb-3">
+      <SadOutline
+        color={'#00000'} 
+        height="40px"
+        width="40px"
+      />
+    </div>
+    <div>
+        <h5 className="text-muted">No results to display </h5>
+    </div>
+  </div>)
+}
+const getURL =(movie,flag,path)=>{
+  return  flag? `/movie-details/${movie.id}`:`${path}/${slug(movie.title)}`
+}
 const MovieList =(props)=>{
-   console.log(props)
-    const{poster_path,overview,title,popularity,}=props.movie
-    let img
-    if(poster_path !== null ){
-        img= <img alt={title} className="bd-placeholder-img card-img-top poster-img" src={"https://image.tmdb.org/t/p/original"+poster_path}/>
-    } else{
-        img = <svg className="bd-placeholder-img card-img-top poster-svg" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Image cap" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text className="svg-text-field" textAnchor="middle" x="50%" y="50%" fill="#dee2e6" dy=".3em">{title}</text></svg>
-    }
-    let card 
-    if(props.plainList){
-      card = (
-      <div className="col movie-col" onClick={props.onClick}>
-        <div className="card">
-          <div className="card-body">
-            {title}
-          </div>
-        </div>
-      </div>)
-    }
-    else {
-      card = (<div className="col movie-col" >
-      <div className="card shadow-sm">
-         {/* {img} */}
-        <div className="card-body">
-        <h5 className="card-title">{title}</h5>
-          <p className="card-text">{overview}</p>
-          <div className="d-flex justify-content-between align-items-center">
-            <div className="btn-group">
-              <button type="button" className="btn btn-sm btn-outline-secondary">View</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>)
-    }
-    return card
+   const{moviesList,linkPath,movieSelected,setSelectedItemHandler,similarMovie}=props
+    return (<div className="row">
+          {(moviesList.length>0)? (moviesList.map((movie)=>( <div className={(movieSelected.id === movie.id && !similarMovie)? "col movie-item selected-movie mb-2":"col-12 movie-item mb-2" } key={movie.id} onClick={(e)=> !similarMovie? setSelectedItemHandler(movie):e.preventDefault()}>
+                          <div className="card">
+                            
+                          <Link to={{
+                                pathname: getURL(movie,similarMovie,linkPath) ,
+                                state: movie
+                              }}>
+                            <div className="card-body">
+                              {movie.title}
+                            </div>
+                            </Link>
+                          </div>
+                        </div>)
+                        )):(<NoResult/>)}
+  </div>)
 }
 
 export default MovieList

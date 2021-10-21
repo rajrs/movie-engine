@@ -6,12 +6,15 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.app{
+  background-color: #fbfbfb;
 }
-
+.flow-block{
+  overflow: hidden;
+}
+.pointer{
+  cursor: pointer;
+}
 /*preloader css*/
 .spinner-warp{
   position: absolute;
@@ -19,6 +22,7 @@ code {
   height: 100vh;
   background: rgb(255 255 255 / 58%);
   z-index: 10;}
+
 #spinner.active {
   display: block;
 }
@@ -79,9 +83,20 @@ code {
   min-height: 72px;
 }
 .movie-list-block{
-  height: 70vh;
+  height: 75vh;
   overflow: hidden;
-    overflow-y: scroll;
+  overflow-y: scroll;
+}
+.movie-list-block::-webkit-scrollbar {
+  width: 5px;
+}
+ 
+.movie-list-block::-webkit-scrollbar-track {
+  background: #ddd;
+}
+ 
+.movie-list-block::-webkit-scrollbar-thumb {
+  background: #666; 
 }
 
 .movie-item.selected-movie .card{
