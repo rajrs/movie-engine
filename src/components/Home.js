@@ -81,9 +81,6 @@ const updateQuery=(e)=>{
           <div className="row">
             <div className="col-12">
             <div className="card p-2 mb-4 shadow-sm">
-              {/* <p>{`localstate:${query},redux:${searchQuery}, currentpage:${currentPg},totalPg:${totalPg},movieList:${movieList.length}` }</p> */}
-              {/* <p>{JSON.stringify(movieSelected)}</p> */}
-              {/* <p>{JSON.stringify(selectedItem)}</p> */}
             <div className="input-group">
               <input type="text" className="form-control" placeholder="Enter your query" onKeyUp={updateQuery}/>
               <button type="submit" className="btn btn-primary" onClick={()=>getSearchResult()}>Search</button>

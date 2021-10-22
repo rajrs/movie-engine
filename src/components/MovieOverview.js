@@ -13,7 +13,7 @@ const MovieOverview =(props)=>{
       <div className="d-flex justify-content-between align-items-center">
         <div className="btn-group">
           <Link to={ {pathname: `/movie-details/${props.movie.id}` ,
-                       state: props.movie}} className="btn btn-sm btn-outline-secondary">View</Link>
+                       state: props.movie}} className="btn btn-sm btn-outline-secondary">View more</Link>
         </div>
       </div>
     </div>

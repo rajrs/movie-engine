@@ -1,10 +1,10 @@
 import { useLocation,useHistory  } from "react-router"
-import { ArrowBackOutline } from 'react-ionicons'
+import { ArrowBackOutline,CalendarOutline,ThumbsUpOutline } from 'react-ionicons'
 const MovieDetails=(props)=>{
     let location = useLocation()
     let history = useHistory();
     console.log(location)
-    const{original_title,title,overview,poster_path,vote_average,vote_count}=location.state;
+    const{original_title,title,overview,poster_path,release_date,vote_average,vote_count}=location.state;
     let img
     if(poster_path !== null ){
         img= <img alt={title} className="bd-placeholder-img card-img-top poster-img" src={"https://image.tmdb.org/t/p/original"+poster_path}/>
@@ -13,9 +13,9 @@ const MovieDetails=(props)=>{
     }
     return (<>
     <div className="row  justify-content-center mt-4">
-        <div className="col-4 movie-col" >
+        <div className="col-lg-4 movie-col col-md-12" >
             <div className="pb-2 pointer">
-            <ArrowBackOutline onClick={history.goBack}
+            <ArrowBackOutline onClick={history.goBack} 
             color={'#00000'}
             height="30px"
             width="30px"
@@ -26,10 +26,21 @@ const MovieDetails=(props)=>{
             {img}
             <div className="card-body">
             <h5 className="card-title">{title}</h5>
-                <p className="card-text">{overview}</p>
-                <div className="d-flex justify-content-between align-items-center">
-               
+            <p className="card-text">{overview}</p>
+            <div className="row">
+                <div className="col">
+                    <CalendarOutline 
+                    height="20px"
+                    width="20px"/>
+                        <span className="text-muted px-2">{release_date}</span>
+                    </div>
+                <div className="col">
+                <ThumbsUpOutline 
+                    height="20px"
+                    width="20px"/>
+                    <span className="text-muted px-2">{vote_average}</span>
                 </div>
+            </div>
             </div>
             </div>
         </div>
